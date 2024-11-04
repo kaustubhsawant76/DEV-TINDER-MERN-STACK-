@@ -1,7 +1,7 @@
 const express = require("express");
 const app= express();
 
- 
+ //always write bigger same routes first
 app.use("/hello/2", (req,res) => {
     res.send("hello 2 2 2 2 2  2 2 2");
     
