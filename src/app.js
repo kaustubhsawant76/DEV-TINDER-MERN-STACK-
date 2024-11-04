@@ -2,6 +2,10 @@ const express = require("express");
 const app= express();
 
  
+app.use("/hello/2", (req,res) => {
+    res.send("hello 2 2 2 2 2  2 2 2");
+    
+});
 
 app.use("/hello", (req,res) => {
     res.send("hello hello hello");
@@ -23,3 +27,5 @@ app.listen(7777,()=>{
     console.log("The server is running on port 7777");
     
 });
+
+
