@@ -28,4 +28,6 @@ app.listen(7777,()=>{
     
 });
 
+//ANY URL youtype on internet the method is always get
+
 
