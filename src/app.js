@@ -8,9 +8,63 @@ const app= express();
    
 // });
 
+//write as many as b's you want between a and c
+// app.get("/ab+c", (req,res) => {
+//     res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+// });
+
+// means b is optional
+// app.get("/ab?c", (req,res) => {
+//     res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+// });
+
+ //write anything between ab and c
+// app.get("/ab*c", (req,res) => {
+//     res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+// });
+
+//REGEX ALSO WORKS MEANS ANYTHING THAT STARTS WITH a 
+// app.get(/a/, (req,res) => {
+//     res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+// });
+
+//REGEX ALSO WORKS, MEANS ANYTHING THAT ENDS WITH FLY 
+app.get(/.*fly$/, (req,res) => {
+    res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+});
+
+
+// means bc are grouprd and bc is optional similarly we can do bc++ so we can write route /"abcbcbcbcbcd"
+// app.get("/a(bc)?d", (req,res) => {
+//     res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+// });
 
 //This will handle only get call to user
 app.get("/user", (req,res) => {
+    //will give userid and password entered in postman and we can add more by &
+    console.log(req.query);
+    
+    res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+});
+
+//: means dynamic route
+app.get("/user/:userId", (req,res) => {
+    console.log(req.params);
+    
+    res.send({firstname:"Kaustubh" , lastname:"Sawant"});
+   
+});
+
+app.get("/user/:userId/:name/:password", (req,res) => {
+    console.log(req.params);
+    
     res.send({firstname:"Kaustubh" , lastname:"Sawant"});
    
 });
