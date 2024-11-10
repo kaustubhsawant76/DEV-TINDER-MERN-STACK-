@@ -108,24 +108,66 @@ const app= express();
 //app.use("/route",rH1,[rH2,rH3],rH4,rH5)
 //app.use("/route",[rH1,rH2,rH3,rH4,rH5])
 
-app.use("/user",[(req,res,next)=>{
-    //  res.send("response 1")
-     next()
-},
-(req,res,next)=>{
-   // res.send("response 2")
-   next()
-}
-,(req,res,next)=>{
-    //  res.send("response 1")
-     next()
-},(req,res,next)=>{
-    //  res.send("response 1")
-     next()
-},(req,res,)=>{
-      res.send("response 1")
+// app.use("/user",[(req,res,next)=>{
+//     //  res.send("response 1")
+//      next()
+// },
+//THESE FUNCTIONS IN MIDDLE ARE KNOWN AS MIDDLEWARE
+// (req,res,next)=>{
+//    // res.send("response 2")
+//    next()
+// }
+// ,(req,res,next)=>{
+//     //  res.send("response 1")
+//      next()
+// },(req,res,next)=>{
+//     //  res.send("response 1")
+//      next()
+// },(req,res,)=>{
+//       res.send("response 1")
      
-}])
+// }])
+
+//can be also written as two independent route handlers
+//GET/Users => Middlewear chain => Request Handler
+
+// app.use("/user",(req,res,next)=>{
+//     //  res.send("response 1")
+//      next()
+// })
+
+// app.use("/user",(req,res)=>{
+//       res.send("response 1")
+     
+// })
+
+app.get("/admin/getAllData",(req,res)=>{
+    //Logic of checking if the user is authorized or not
+    const token="xyz"
+     const isUserAuthorized = token === "xyz";
+     if(isUserAuthorized){
+        res.send("All data send")
+     } 
+     else
+     {
+        res.status(401).send("you are un authorized")
+     }
+   
+})
+
+app.get("/admin/deleteUser",(req,res)=>{
+     //Logic of checking if the user is authorized or not
+     const token="xyzf"
+     const isUserAuthorized = token === "xyz";
+     if(isUserAuthorized){
+        res.send("Deleted a user")
+     } 
+     else
+     {
+        res.status(401).send("you are un authorized")
+     }
+    
+})
 
 app.listen(7777,()=>{
     console.log("The server is running on port 7777");
