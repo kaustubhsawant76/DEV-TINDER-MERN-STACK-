@@ -141,32 +141,61 @@ const app= express();
      
 // })
 
-app.get("/admin/getAllData",(req,res)=>{
-    //Logic of checking if the user is authorized or not
-    const token="xyz"
-     const isUserAuthorized = token === "xyz";
-     if(isUserAuthorized){
-        res.send("All data send")
-     } 
-     else
-     {
-        res.status(401).send("you are un authorized")
-     }
+
+//if we donot use middle wear we have to write code like following
+// app.get("/admin/getAllData",(req,res)=>{
+//     //Logic of checking if the user is authorized or not
+//     const token="xyz"
+//      const isUserAuthorized = token === "xyz";
+//      if(isUserAuthorized){
+//         res.send("All data send")
+//      } 
+//      else
+//      {
+//         res.status(401).send("you are un authorized")
+//      }
    
+// })
+
+// app.get("/admin/deleteUser",(req,res)=>{
+//      //Logic of checking if the user is authorized or not
+//      const token="xyzf"
+//      const isUserAuthorized = token === "xyz";
+//      if(isUserAuthorized){
+//         res.send("Deleted a user")
+//      } 
+//      else
+//      {
+//         res.status(401).send("you are un authorized")
+//      }
+    
+// })
+
+///admin middlewear will be called only when you use/admin 
+app.use("/admin",(req,res,next)=>{
+   const token="xyz"
+   const isUserAuthorized = token === "xyz";
+   if(!isUserAuthorized){
+      res.status(401).send("you are un authorized")
+   } else {
+      next();
+   }
 })
 
-app.get("/admin/deleteUser",(req,res)=>{
-     //Logic of checking if the user is authorized or not
-     const token="xyzf"
-     const isUserAuthorized = token === "xyz";
-     if(isUserAuthorized){
-        res.send("Deleted a user")
-     } 
-     else
-     {
-        res.status(401).send("you are un authorized")
-     }
+
+app.get("/user",(req,res)=>{
+   res.send("User Data Sent");
+});
+
+app.get("/admin/getAllData",(req,res)=>{
+   //Logic of checking if the user is authorized or not
+       res.send("All data send");
     
+});
+
+app.get("/admin/deleteUser",(req,res)=>{
+    //Logic of checking if the user is authorized or not
+    res.send("Deleted a user");
 })
 
 app.listen(7777,()=>{
