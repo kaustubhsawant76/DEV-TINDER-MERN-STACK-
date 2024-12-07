@@ -172,18 +172,11 @@ const app= express();
 // })
 
 ///admin middlewear will be called only when you use/admin 
-app.use("/admin",(req,res,next)=>{
-   const token="xyz"
-   const isUserAuthorized = token === "xyz";
-   if(!isUserAuthorized){
-      res.status(401).send("you are un authorized")
-   } else {
-      next();
-   }
-})
+const {adminAuth,userAuth}=require("./middlewares/auth");
+app.use("/admin",adminAuth)
 
 
-app.get("/user",(req,res)=>{
+app.get("/user",userAuth,(req,res)=>{
    res.send("User Data Sent");
 });
 
