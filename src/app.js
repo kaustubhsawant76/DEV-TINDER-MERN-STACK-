@@ -172,23 +172,38 @@ const app= express();
 // })
 
 ///admin middlewear will be called only when you use/admin 
-const {adminAuth,userAuth}=require("./middlewares/auth");
-app.use("/admin",adminAuth)
+// const {adminAuth,userAuth}=require("./middlewares/auth");
+// app.use("/admin",adminAuth)
 
 
-app.get("/user",userAuth,(req,res)=>{
-   res.send("User Data Sent");
-});
+// app.get("/user",userAuth,(req,res)=>{
+//    res.send("User Data Sent");
+// });
 
-app.get("/admin/getAllData",(req,res)=>{
-   //Logic of checking if the user is authorized or not
-       res.send("All data send");
+// app.get("/admin/getAllData",(req,res)=>{
+//    //Logic of checking if the user is authorized or not
+//        res.send("All data send");
     
+// });
+
+// app.get("/admin/deleteUser",(req,res)=>{
+//     //Logic of checking if the user is authorized or not
+//     res.send("Deleted a user");
+// })
+
+app.get("/getUserData",(req,res) => {
+
+   throw new Error("hfhhfhg");
+   res.send("User Data Send")
 });
 
-app.get("/admin/deleteUser",(req,res)=>{
-    //Logic of checking if the user is authorized or not
-    res.send("Deleted a user");
+//TRY-CATCH method is used to catch any error
+
+//This error catching method works universally
+app.use("/",(err,req,res,next) => {
+   if (err) {
+    res.status(500).send("something went wrong")  
+   }
 })
 
 app.listen(7777,()=>{
