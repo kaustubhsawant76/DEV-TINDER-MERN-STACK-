@@ -191,20 +191,20 @@ const app= express();
 //     res.send("Deleted a user");
 // })
 
-app.get("/getUserData",(req,res) => {
+// app.get("/getUserData",(req,res) => {
 
-   throw new Error("hfhhfhg");
-   res.send("User Data Send")
-});
+//    throw new Error("hfhhfhg");
+//    res.send("User Data Send")
+// });
 
 //TRY-CATCH method is used to catch any error
 
 //This error catching method works universally
-app.use("/",(err,req,res,next) => {
-   if (err) {
-    res.status(500).send("something went wrong")  
-   }
-})
+// app.use("/",(err,req,res,next) => {
+//    if (err) {
+//     res.status(500).send("something went wrong")  
+//    }
+// })
 
 app.listen(7777,()=>{
     console.log("The server is running on port 7777");
