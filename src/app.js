@@ -1,5 +1,8 @@
 const express = require("express");
+const connectDB= require("./config/database");
+
 const app= express();
+
 
 
 // app.use("/user", (req,res) => {
@@ -206,10 +209,24 @@ const app= express();
 //    }
 // })
 
-app.listen(7777,()=>{
-    console.log("The server is running on port 7777");
-    
-});
+
+connectDB()
+.then(()=>{
+    console.log("Database connection established ...");
+    app.listen(7777,()=>{
+      console.log("The server is running on port 7777");
+      
+  });
+  
+
+    })
+    .catch((err)=>{
+        console.error("Database cannot be connected!!");
+        
+    });
+
+
+
 
 //ANY URL you type on internet the method is always get
 //if we write an empty reqest handler then the output(response is it will hang)
