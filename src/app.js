@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDB= require("./config/database");
+const User = require("./models/user");
 
 const app= express();
 
@@ -208,6 +209,26 @@ const app= express();
 //     res.status(500).send("something went wrong")  
 //    }
 // })
+
+app.post("/signup",async(req,res)=>{
+   const user=new User({
+    firstName:"Virat",
+    lastName:"Kolhi",
+    emailId:"virat142@gmail.com",
+    password:"viru678"
+   })
+
+try {
+   await user.save()
+
+   res.send("Data saved succesfully") 
+} catch (error) {
+   res.status(400).send("Error saving the user" + error.message)
+}
+
+   
+
+})
 
 
 connectDB()
