@@ -210,13 +210,18 @@ const app= express();
 //    }
 // })
 
+app.use(express.json());
+
 app.post("/signup",async(req,res)=>{
-   const user=new User({
-    firstName:"Virat",
-    lastName:"Kolhi",
-    emailId:"virat142@gmail.com",
-    password:"viru678"
-   })
+
+  // console.log(req.body)
+   // const user=new User({
+   //  firstName:"MS",
+   //  lastName:"Dhoni",
+   //  emailId:"dhoni53@gmail.com",
+   //  password:"dhonibhai"
+   // })
+   const user=new User(req.body)
 
 try {
    await user.save()
