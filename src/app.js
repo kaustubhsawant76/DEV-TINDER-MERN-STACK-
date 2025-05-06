@@ -212,6 +212,9 @@ const app= express();
 
 app.use(express.json());
 
+
+
+
 app.post("/signup",async(req,res)=>{
 
   // console.log(req.body)
@@ -235,6 +238,75 @@ try {
 
 })
 
+app.get("/user",async (req,res)=>{
+   const userEmail=req.body.emailId; 
+   try {
+    const user=await User.findOne({emailId:userEmail})
+    if(user.length ===0)
+    {
+      res.status(404).send("User not found")
+    }
+    else{
+      res.send(user)
+    }
+    
+ 
+   } catch (error) {
+    res.status(400).send("Something Went Wrong")
+   }
+    
+ })
+ 
+ app.get("/feed",async(req,res)=>{
+
+   try {
+      const user=await User.find({})
+      if(user.length ===0)
+      {
+        res.status(404).send("User not found")
+      }
+      else{
+        res.send(user)
+      }
+      
+   
+     } catch (error) {
+      res.status(400).send("Something Went Wrong")
+     }
+
+ })
+
+ app.delete("/user",async(req,res)=>{
+   const userId=req.body.userId
+   try {
+      // const user=await User.findByIdAndDelete(userId)
+      const user=await User.findByIdAndDelete({_id:userId})
+      
+      res.send("User Deleted Succesfully")
+   
+     } catch (error) {
+      res.status(400).send("Something Went Wrong")
+     }
+} )
+
+ app.patch("/user",async(req,res)=>{
+   const userId=req.body.userId;
+   const data=req.body;
+   try {
+      // const user=await User.findByIdAndDelete(userId)
+      const user=await User.findByIdAndUpdate({_id:userId},data,{
+         returnDocument:"before",
+         runValidators:true,
+      })
+      
+      console.log(user);
+      
+      res.send("Upadated Succesfully")
+   
+     } catch (error) {
+      res.status(400).send("UPDATE FAILED:" + error.message)
+     }
+} )
 
 connectDB()
 .then(()=>{
