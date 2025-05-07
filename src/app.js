@@ -309,6 +309,9 @@ app.get("/user",async (req,res)=>{
   if(!isUpdateAllowed){
     throw new Error("Update not allowed")
   }
+  if(data?.skills.length > 10){
+    throw new Error("Skills cannot be more than 10")
+  }
       // const user=await User.findByIdAndDelete(userId)
       const user=await User.findByIdAndUpdate({_id:userId},data,{
          returnDocument:"before",
