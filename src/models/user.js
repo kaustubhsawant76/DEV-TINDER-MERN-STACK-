@@ -44,6 +44,10 @@ age:{
 },
 gender:{
     type:String,
+    // enum:{
+    //     values:["male","female","others"],
+    //     message:`{Value} is not a valid gender type`,
+    // },
     validate(value){
         if(!["male","female","others"].includes(value)){
             throw new Error("Gender Data is not valid")
@@ -70,6 +74,8 @@ skills:{
 },{
     timestamps:true,
 });
+
+userSchema.index({firstName:1,lastName:1}) //compound indexes
 
 userSchema.methods.getJWT=async function(){
     const user =this;
