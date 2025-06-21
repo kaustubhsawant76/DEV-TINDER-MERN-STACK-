@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const user = require("./models/user");
 
 const app = express();
+const cors=require("cors");
 
 // app.use("/user", (req,res) => {
 
@@ -206,6 +207,11 @@ const app = express();
 //     res.status(500).send("something went wrong")
 //    }
 // })
+
+app.use(cors({
+  origin:"http://localhost:5173",
+  credentials:true,
+}));
 
 app.use(express.json());
 
